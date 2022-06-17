@@ -6,6 +6,11 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { AuthProvider } from "./context/AuthContext";
+import Logout from "./pages/Logout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import BackTings from "./components/BackTings";
+
 
 
 
@@ -16,14 +21,23 @@ const App = () => {
 
 
   
-      <Navbar/>
+      <AuthProvider>
+        <Navbar/>
+        <Routes>
+          <Route  path="/oddaj-rzeczy" element={<ProtectedRoute>
+            <BackTings/>
+          </ProtectedRoute>} />
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/logout" element={<Logout/>} />
+          {/* <Route path="*" element={<NotFound/>}/> */}
+        </Routes>
 
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
+        
+
+      </AuthProvider>
+      
 
       <Footer/>
     </BrowserRouter>
