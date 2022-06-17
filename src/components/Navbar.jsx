@@ -40,7 +40,7 @@ const Navbar = () => {
         </Flex>
 
         <Flex justify="flex-end" gap="2rem" color='gray' mt='1rem' cursor='pointer'>
-          <Links to="home" >Start</Links>
+          <Link to="/" >Start</Link>
           <Links to='kroki' spy={true} smooth={true} offset={50} >O co chodzi?</Links>
           <Links to="about" spy={true} smooth={true} offset={50}>O nas</Links>
           <Links to="fundaction" spy={true} smooth={true} offset={50} >Fundacja i organizacje</Links>
