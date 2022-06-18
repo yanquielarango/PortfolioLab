@@ -6,6 +6,8 @@ import Icon1 from '../assets/Icon1.svg'
 import Icon2 from '../assets/Icon2.svg'
 import Icon3 from '../assets/Icon3.svg'
 import Icon4 from '../assets/Icon4.svg'
+import People from '../assets/People.jpg';
+import Signature from '../assets/Signature.svg';
 
 
 export default  {
@@ -17,4 +19,6 @@ export default  {
     Icon2,
     Icon3,
     Icon4,
+    People,
+    Signature,
 };

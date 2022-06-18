@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Logout from "./pages/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BackTings from "./components/BackTings";
+import About from "./components/About";
 
 
 
@@ -17,10 +18,7 @@ import BackTings from "./components/BackTings";
 const App = () => {
   return (
    <>
-    <BrowserRouter> 
-
-
-  
+    <BrowserRouter>   
       <AuthProvider>
         <Navbar/>
         <Routes>
@@ -32,13 +30,11 @@ const App = () => {
           <Route path="/register" element={<Register/>} />
           <Route path="/logout" element={<Logout/>} />
           {/* <Route path="*" element={<NotFound/>}/> */}
-        </Routes>
-
-        
+        </Routes>       
 
       </AuthProvider>
       
-
+      <About/>
       <Footer/>
     </BrowserRouter>
     
