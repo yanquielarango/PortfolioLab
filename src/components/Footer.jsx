@@ -1,8 +1,12 @@
-import React from 'react'
+import {Stack, Text} from '@chakra-ui/react';
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <Stack pt='2rem' >
+      <Stack>
+        <Text>dadasdasd</Text>
+      </Stack>
+    </Stack>
   )
 }
 

@@ -5,12 +5,12 @@ import Register from "./pages/Register";
 
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+
 import { AuthProvider } from "./context/AuthContext";
 import Logout from "./pages/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BackTings from "./components/BackTings";
-import About from "./components/About";
+
 
 
 
@@ -34,8 +34,8 @@ const App = () => {
 
       </AuthProvider>
       
-      <About/>
-      <Footer/>
+      
+      
     </BrowserRouter>
     
    </>
