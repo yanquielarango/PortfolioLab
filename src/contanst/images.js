@@ -8,6 +8,8 @@ import Icon3 from '../assets/Icon3.svg'
 import Icon4 from '../assets/Icon4.svg'
 import People from '../assets/People.jpg';
 import Signature from '../assets/Signature.svg';
+import form from '../assets/form.jpg';
+import Instagram from '../assets/Instagram.svg';
 
 
 export default  {
@@ -21,4 +23,5 @@ export default  {
     Icon4,
     People,
     Signature,
+    form,
 };

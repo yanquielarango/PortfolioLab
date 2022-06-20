@@ -24,7 +24,7 @@ const SimpleSteps = () => {
 
         <Stack background='blackAlpha.200' p={8} color='black' >
             <Container maxW="800px" mx="auto" px={2} py={4}>
-            <Stack   direction='row' justify='space-between' align='center'>
+               <Stack   direction='row' justify='space-between' align='center'>
                 <Stack  align='center' color='gray'>
                     <Image src={images.Icon1}  alt='Icon1' w='60px' />
                     <Text fontSize='12px'  fontWeight='bold'>Wybierz rzeczy</Text>
