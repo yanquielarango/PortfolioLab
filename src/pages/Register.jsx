@@ -1,143 +1,96 @@
-import {useState} from 'react';
+import {Flex, Box, Text, Image, VStack, FormControl, FormLabel, Input, FormErrorMessage, Button} from '@chakra-ui/react';
+import { Formik, Field } from 'formik';
 import { Link, useNavigate  } from 'react-router-dom';
 
-import {Stack, Text, Image,  FormControl,
-  FormLabel,
-  Input,
-  InputGroup, InputRightElement, Icon, Button} from '@chakra-ui/react';
 
-  import {ViewIcon, ViewOffIcon} from '@chakra-ui/icons';
-import {images} from '../contanst';
 import { useAuth } from '../context/AuthContext';
-import Alert from '../components/Alert';
+
+import {images} from '../contanst';
 
 
 const Register = () => {
-  const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
+
+    const { signup } = useAuth();
+    const navigate = useNavigate();
 
 
-  const { signup } = useAuth();
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [error, setError] = useState('');
-
-  const navigate = useNavigate();
-
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      if(  user.password === '' || user.email === '') {
-        setError("All fields are required");
-      }
-      else if( user.password !== user.confirmPassword) {
-        setError("Passwords do not match");        
-      }
-      else if (user.email === true) {
-        setError("Email is already in use");
-      }
-      else if(user.password.length < 6) {
-        setError("Password needs to be at least 6 characters");
-      }
-      else if( user.email.includes('@') === false) {
-        setError("Invalid email");
-      }
-      else {
-        await signup(user.email, user.password);
-        navigate("/");
-      }
-
-    
-    } catch (err) {
-      console.log(err.code);
-
-  
-    
-  }
-  }
 
   return (
-    <Stack>
-      <Stack justify='center' align='center' mt='5rem'>
-        <Text fontSize='2xl' color='blackAlpha.800'>
-          Załóż konto
-        </Text>
-        <Image src={images.Decoration} alt='Decoration' w={140} mt='1rem' paddingBottom='2rem' />
+    <Flex align='center' justify='center'  direction='column' mt='5rem'>
+      <Text fontSize='2xl' color='blackAlpha.800'>
+        Załóż konto
+      </Text>
+      <Image src={images.Decoration} alt='Decoration' w={140} mt='1rem' paddingBottom='2rem' />
+        <Box bg='blackAlpha.200' p={6} rounded='md' w={64}>
+          <Formik 
+            initialValues={{  
+              email: '',
+              password: '', 
+              confirmPassword: '' 
+              }}
+              onSubmit={async (values) => {
+                await signup(values.email, values.password);
+                navigate("/");
+              }}
+              >
 
-        {error?.length > 0 && <Alert message={error} />}
-        
-        <Stack  align='center'w={300} h={280} background='blackAlpha.200' borderRadius='5px'>
-        
-          <Stack w={200}  >
-            
-              <FormControl>
-                <FormLabel htmlFor='email' color='gray' fontSize='12px' mt='1rem'>Email</FormLabel>
-                <Input id='email' type='email'  borderColor='blackAlpha.400' 
-                  placeholder='youremail@company.tld'   fontSize='12px'
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
-                />
-                {/* <Text fontSize='xs' color='red' ml='4px'>{error}</Text> */}
-                <FormLabel htmlFor='password' color='gray' fontSize='12px' mt='1rem'>Hasło</FormLabel>
-                <InputGroup size='md'>
-                    <Input
-                      pr='4.5rem'
-                      type={show ? 'text' : 'password'}
-                      placeholder='Enter password'
-                      borderColor='blackAlpha.400'
-                      fontSize='12px'
-                      onChange={(e) => setUser({ ...user, password: e.target.value })}
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <VStack spacing={4} align='flex-start'>
+                  <FormControl isInvalid={!!errors.email && touched.email}>
+                    <FormLabel htmlFor='email'  fontSize='12px' >Email</FormLabel>
+                    <Field  as={Input}  name='email' type='email'  
+                    borderColor='blackAlpha.400'
+                    variant='filled'
+                    validate={(value) => {
+                      if (!value) {
+                        return 'Email is required';
+                      }
+                      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value.email)) {
+                      errors.email = 'Invalid email address';
+                      }
+                    
+                    }}
                     />
-                    <InputRightElement width='4.5rem'>
-                      <Icon onClick={handleClick} cursor='pointer'>
-                        {show ? <ViewIcon  w={5} h={5}/> : < ViewOffIcon  w={5} h={5}/>}
-                      </Icon>
-                    </InputRightElement>                    
-                  </InputGroup>
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl isInvalid={!!errors.password && touched.password}>
+                    <FormLabel htmlFor='password'  fontSize='12px' >Hasło</FormLabel>
+                    <Field  as={Input}  name='password' type='password'
+                    borderColor='blackAlpha.400'
+                    variant='filled'
+                    validate={(value) => {
+                      if(value.length < 6) {
+                        return 'Password needs to be at least 6 characters';
+                      }
+                    }}
                   
-                
-                  {/* <Text fontSize='xs' color='red' ml='5px'>{error}</Text> */}
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+                  
+                  <Button type='submit' colorScheme='teal' w='100%' variant='solid'>Załóż konto</Button>
 
-                  <FormLabel htmlFor='password' color='gray' fontSize='12px' mt='1rem'>Powtórz hasło</FormLabel>
-                    <InputGroup size='md'>
-                        <Input
-                          pr='4.5rem'
-                          type={show ? 'text' : 'password'}
-                          placeholder='Enter password'
-                          borderColor='blackAlpha.400'
-                          fontSize='12px'
-                          onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
-                        />
-                      
-                      </InputGroup>
+                  <Flex gap='2rem'>
+                  <Text fontSize='12px'>
+                    Posiadasz już konto?
+                  </Text>
+                  <Text fontSize='12px' color='teal' fontWeight='bold'>
+                    <Link to='/login'>Zaloguj się</Link>
+                  </Text>
+                  </Flex>
+                </VStack>
+              </form>
+            )}
               
-              </FormControl>
-            
-          </Stack>
-        </Stack>
-    
-        <Stack w={350} direction='row' justify='space-between'   align='center'>
-          <Button variant='ghost' colorScheme='gray' fontSize='12px' fontWeight='normal' mt='1rem' color='gray'>
-            <Link to='/login'> Zaloguj się </Link>
-          </Button>
-          <Stack pt='1rem'>
-            <Text  color='gray'  >
-              <Button onClick={handleSubmit} variant='ghost' colorScheme='gray' fontSize='12px' fontWeight='normal'>Załóż konto</Button>
-            </Text>
-
-          </Stack>
-        </Stack>
-
-      </Stack>
-    </Stack>
+            </Formik>
+        </Box>
+    </Flex>
   )
 }
 
 export default Register
+
+
+
+// type={show ? 'text' : 'password'}

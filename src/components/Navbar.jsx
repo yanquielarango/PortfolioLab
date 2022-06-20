@@ -33,8 +33,10 @@ const Navbar = () => {
             <Text onClick={handleLogout}  cursor='pointer' fontWeight='normal'  fontSize='14px' >Wyloguj</Text>
             </Stack>
           ) : <>
-          <Text fontSize="sm"><Link to="/login" >Zaloguj</Link></Text>
-          <Text fontSize="sm" border='1px' borderColor='yellow' p='.3rem'><Link to="/register" >Załóż konto</Link></Text> 
+          <Button variant='ghost'  ><Link to="/login" >Zaloguj</Link></Button>
+          <Button colorScheme='yellow' variant='outline'>
+              <Link to="/register" >Załóż konto</Link>
+          </Button>
           </>}
         
         </Flex>
