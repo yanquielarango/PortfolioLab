@@ -14,7 +14,7 @@ const HomeHeader = () => {
 
 
     return (
-        <Container maxW='1200px'mx="auto" px={4} py={4} id='home'>
+        <Container maxW='1200px'mx="auto" px={4} py='.8rem' id='home'>
             <Stack direction='row'>
             <Stack w='500px'>
             <Image src={images.home} alt='Home' pos='absolute' top='0' left='-15%'  w='50%' h={600} objectFit='cover'/>

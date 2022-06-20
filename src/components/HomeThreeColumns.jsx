@@ -2,7 +2,7 @@ import {Stack, Container, Text, Heading } from '@chakra-ui/react'
  
 const HomeThreeColumns = () => {
   return (
-    <Stack background='#FAD648' p={8} color='#5E5322' id='kroki' >
+    <Stack background='#FAD648' p={10}   color='#5E5322' id='kroki' >
         <Container maxW="1200px" mx="auto" px={4} py={4}>
           <Stack   direction='row' justify='space-between' align='center'>
             <Stack w='350px' align='center' >
