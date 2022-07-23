@@ -10,6 +10,7 @@ import People from '../assets/People.jpg';
 import Signature from '../assets/Signature.svg';
 import form from '../assets/form.jpg';
 import Instagram from '../assets/Instagram.svg';
+import BackgroundForm from '../assets/BackgroundForm.jpg';
 
 
 export default  {
@@ -24,4 +25,6 @@ export default  {
     People,
     Signature,
     form,
+    Instagram,
+    BackgroundForm
 };

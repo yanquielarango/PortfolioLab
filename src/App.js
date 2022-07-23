@@ -9,7 +9,10 @@ import Navbar from "./components/Navbar";
 import { AuthProvider } from "./context/AuthContext";
 import Logout from "./pages/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
-import BackTings from "./components/BackTings";
+
+import { Toaster } from 'react-hot-toast';
+import ThingsBack from "./pages/ThingsBack";
+import { DBProvider } from "./context/DbContext";
 
 
 
@@ -20,10 +23,12 @@ const App = () => {
    <>
     <BrowserRouter>   
       <AuthProvider>
+      <DBProvider>
         <Navbar/>
+        <Toaster />
         <Routes>
           <Route  path="/oddaj-rzeczy" element={<ProtectedRoute>
-            <BackTings/>
+            <ThingsBack/>
           </ProtectedRoute>} />
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<LoginPage/>} />
@@ -31,7 +36,7 @@ const App = () => {
           <Route path="/logout" element={<Logout/>} />
           {/* <Route path="*" element={<NotFound/>}/> */}
         </Routes>       
-
+      </DBProvider>
       </AuthProvider>
       
       

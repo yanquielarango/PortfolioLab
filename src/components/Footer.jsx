@@ -1,7 +1,8 @@
 
 import { images} from '../contanst';
 import {Flex, Stack, Heading, Box, Text, Image, HStack, FormControl, FormLabel, Input, FormErrorMessage, Button} from '@chakra-ui/react';
-import { Formik, Field } from 'formik';
+import { Formik, Field} from 'formik';
+import { toast } from 'react-hot-toast';
 
 
 const Footer = () => {
@@ -9,7 +10,7 @@ const Footer = () => {
     <>
       <Stack direction='row' mt='3rem' spacing={2} id='contact' color='#3C3C3C'  >
         <Stack w='60%'>
-            <Image src={images.form}  alt='People' opacity='0.2' objectFit='cover' w='300%' h='600px'/>
+            <Image src={images.form}  alt='People' opacity='0.2' objectFit='cover' w='100%' h='100%'/>
         </Stack>
         <Stack w='30%'   align='center'  >
             <Heading as='h2' fontWeight='400' fontSize='2xl' mt='5rem'> Skontaktuj się z nami</Heading>
@@ -22,9 +23,27 @@ const Footer = () => {
                   email: '', 
                   message: '' 
                   }}
-                  onSubmit={async (values) => {
-                  
+                  onSubmit={async (values, {resetForm}) => {
+                    const response = await fetch('https://fer-api.coderslab.pl/v1/portfolio/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(values)
+
+                    })
+                    const data = await response.json()
+                    console.log(data)
+
+                    if(data.status === 'success'){
+                      toast.success('Wiadomość wysłana')
+                      resetForm({values: ''})
+                    }
+                    else{
+                      toast.error('Wiadomość nie wysłana')
+                    }
+                    
                   }}
+
+
                   >
 
                 {({ handleSubmit, errors, touched }) => (
@@ -74,8 +93,18 @@ const Footer = () => {
                       variant='flushed'
                       placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                        fontSize='10px' opacity='.5' />
-                    </FormControl>                  
+                        fontSize='10px' opacity='.5'
+                        validate={(value) => {
+                          if (value === '') {
+                            return 'message can not be empty';
+                          }else if (value.length < 120) {
+                            return 'message must be at least 120 characters';
+                          }
+                        
+                        }}
+                        />
+                        <FormErrorMessage>{errors.message}</FormErrorMessage>
+                      </FormControl>                  
                     <Button type='submit' colorScheme='gray' mt='2rem' variant='outline'  float='right' >Wyślij</Button>
                   </form>
                 )}
@@ -94,9 +123,7 @@ const Footer = () => {
         Copyright by Coders Lab
         </Text>  
   </Flex>
-  <Stack>
-    <Image src={images.Decoration} alt='decoration' w='150px' />
-  </Stack>
+  
 </>
   )
 }

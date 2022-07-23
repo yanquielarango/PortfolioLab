@@ -1,4 +1,5 @@
 import {Stack, Container, Text, Heading } from '@chakra-ui/react'
+
  
 const HomeThreeColumns = () => {
   return (
@@ -30,4 +31,4 @@ const HomeThreeColumns = () => {
   )
 }
 
-export default HomeThreeColumns
+export default  HomeThreeColumns

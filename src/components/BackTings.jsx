@@ -8,10 +8,10 @@ const BackTings = () => {
     <Container maxW='1200px'mx="auto" px={4} py={4}>
     <Stack direction='row'>
       <Stack w='600px'>
-       <Image src={images.formHero} alt='Home' pos='absolute' top='0' left='0'  w='50%' h={600} objectFit='cover'/>
+       <Image src={images.formHero} alt='Home' pos='absolute' top='0' left='0'  w='50%' h={650} objectFit='cover '/>
       </Stack>
       <Stack>
-        <Flex direction='column' justify='center' align='center' mt='7rem'>
+        <Flex direction='column' justify='center' align='center' mt='3.86rem'>
           <Text fontSize='2xl' color='blackAlpha.700'fontWeight='semibold' align='center'>
             Oddaj  rzeczy, których  nie chcesz <br/> POTRZEBUJĄCYM
           </Text>
